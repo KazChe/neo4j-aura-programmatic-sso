@@ -16,8 +16,8 @@ Before running the application, you need to configure the following parameters i
 ### Azure App Registration Parameters
 
 ```javascript
-const azureAppClientId = "YOUR_CLIENT_ID"; // e.g. "25930cb6-8e74-423e-a369-087403ae2a83"
-const azureAppTenantId = "YOUR_TENANT_ID"; // e.g. "cffc4190-7800-41a2-9732-3dab0bedc0d7"
+const azureAppClientId = "YOUR_CLIENT_ID"; 
+const azureAppTenantId = "YOUR_TENANT_ID"; 
 const azureAppRedirectUri = "YOUR_REDIRECT_URI"; // e.g. "http://localhost:3000"
 ```
 
