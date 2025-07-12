@@ -15,16 +15,50 @@ Before running the application, you need to configure the following parameters i
 
 ### Azure App Registration Parameters
 
+#### Azure App Registration
+
+- Use mobile and desktop application platform config
+- Allow public client flows
+- For my poc, I set redirect uri to localhost:3000 which allowed me to simulate auth to Azure and then obtain the `id_token`
+- Added email and preferred_username as optional claims
+- Added groups via the `Add groups claim` UI with `Group ID format`
+
+#### Aura SSO Configuration
+
+**You would need to work with Aura Product Support team to enable SSO for your Aura instance.** A sample configuration is provided below:
+
+```bash
+dbms.security.oidc.untonium-programmatic.display_name=<some_name_here>
+dbms.security.oidc.untonium-programmatic.auth_flow=pkce
+dbms.security.oidc.untonium-programmatic.well_known_discovery_uri=https://login.microsoftonline.com/<AZURE_TENANT_ID>/v2.0/.well-known/openid-configuration
+dbms.security.oidc.untonium-programmatic.params=client_id=<AZURE_CLIENT_ID>;response_type=code;scope=openid profile email offline_access
+dbms.security.oidc.untonium-programmatic.config=principal=sub;code_challenge_method=S256;token_type_principal=id_token;token_type_authentication=id_token
+dbms.security.oidc.untonium-programmatic.claims.username=email
+dbms.security.oidc.untonium-programmatic.claims.groups=groups
+dbms.security.oidc.untonium-programmatic.authorization.group_to_role_mapping=<Azure Security Group Object ID my user is part of>=admin
+dbms.security.oidc.untonium-programmatic.audience=<Azure_CLIENT_ID>
+
+```
+
+You would need to provide the AZURE_* parameters to the Aura Product Support team.
+
+#### Neo4j Aura Parameters
+
 ```javascript
-const azureAppClientId = "YOUR_CLIENT_ID"; 
-const azureAppTenantId = "YOUR_TENANT_ID"; 
+const auraDbId = "YOUR_AURA_DB_ID";
+```
+
+
+```javascript
+const azureAppClientId = "YOUR_CLIENT_ID";
+const azureAppTenantId = "YOUR_TENANT_ID";
 const azureAppRedirectUri = "YOUR_REDIRECT_URI"; // e.g. "http://localhost:3000"
 ```
 
 ### Neo4j Aura Parameters
 
 ```javascript
-const auraDbId = "YOUR_AURA_DB_ID"; // e.g. "5314cd18"
+const auraDbId = "YOUR_AURA_DB_ID";
 ```
 
 ## Security Note
@@ -198,4 +232,3 @@ The Microsoft Authentication Library (MSAL) significantly simplifies the OAuth2.
    - Error handling
 
 Without MSAL, we would need to implement all these OAuth2.0 and PKCE components manually, making the code much more complex and error-prone. MSAL ensures we follow security best practices while keeping the implementation clean and maintainable.
-# neo4j-aura-programmatic-sso
