@@ -7,9 +7,9 @@ import crypto from "crypto";
 
 // change these parameters to match your azure app registration TODO: move to env variables
 const baseAzureUrl = "https://login.microsoftonline.com";
-const azureAppClientId = process.env.AZURE_APP_CLIENT_ID //|| "af137fe7-644f-4c44-bdeb-32a09667b0d7";
-const azureAppTenantId = process.env.AZURE_APP_TENANT_ID //|| "54e85725-ed2a-49a4-a19e-11c8d29f9a0f";
-const azureAppRedirectUri = process.env.AZURE_APP_REDIRECT_URI //|| "http://localhost:3000";
+const azureAppClientId = process.env.AZURE_APP_CLIENT_ID
+const azureAppTenantId = process.env.AZURE_APP_TENANT_ID
+const azureAppRedirectUri = process.env.AZURE_APP_REDIRECT_URI
 
 // change this to match your aura db id TODO: move to env variables
 const auraDbId = process.env.AURA_DB_ID //|| "5314cd18";
